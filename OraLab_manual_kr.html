@@ -121,7 +121,7 @@ li > .tablewrap { margin-top: 6px; }
     <a class="sub" href="#cmp-tab">7.1 탭 둘</a>
     <a class="sub" href="#cmp-sqlid">7.2 SQL_ID 둘</a>
     <a href="#sqlidtab">8. SQL_ID → Tab</a>
-    <a href="#export">9. 엑셀 · PDF</a>
+    <a href="#export">9. 엑셀 · PDF · HTML</a>
     <a href="#basescript">10. 기준 스크립트</a>
     <a href="#keys">11. 키</a>
     <a href="#files">12. 파일 · 권한 · 지원 범위</a>
@@ -337,7 +337,7 @@ SELECT /*+ MONITOR */ a.owner, COUNT(*) cnt
     <tr><td>순서 바꾸기</td><td>탭을 끌어 놓기. 메뉴의 <b>Sort By Name</b> 은 이름 순(숫자는 숫자로 — sql_2 &lt; sql_10)</td></tr>
     <tr><td>복제</td><td>메뉴의 <b>Duplicate</b> — 스크립트 · 메모 · 노트를 가진 탭을 바로 오른쪽에(결과는 복사하지 않음)</td></tr>
     <tr><td>결과만 지우기 / 탭 지우기</td><td>메뉴의 <b>Clear</b> / <b>Close</b>(또는 탭의 ×)</td></tr>
-    <tr><td>내보내기 · 비교</td><td>메뉴의 <b>Save As Excel</b> · <b>Save As PDF</b> · <b>Compare with…</b></td></tr>
+    <tr><td>내보내기 · 비교</td><td>메뉴의 <b>Save As Excel</b> · <b>Save As PDF</b> · <b>Save As HTML</b> · <b>Compare with…</b></td></tr>
 </table></div>
 <p>탭에 마우스를 올리면 그 탭의 <code>SQL_ID — 메모</code> 가 풍선 도움말로 보입니다.</p>
 <p><b>Task</b> 는 주제별 탭 묶음입니다(튜닝 건 하나 = Task 하나). 위 줄의 콤보에는 최근 것이 보이고, <b>More…</b> 가 전체 목록 창을 엽니다 — 이름 검색, 열기, 이름 바꾸기, 지우기. Task 는 접속과 묶이지 않습니다: 탭마다 실행한 서버가 기록됩니다.</p>
@@ -381,15 +381,16 @@ SELECT /*+ MONITOR */ a.owner, COUNT(*) cnt
     <li>SQL 본문은 한 줄로 들어옵니다 — <b>Beautify</b> 로 정리합니다.</li>
 </ul>
 
-<h2 id="export">9. 엑셀 · PDF</h2>
+<h2 id="export">9. 엑셀 · PDF · HTML</h2>
 <div class="tablewrap"><table>
     <tr><th>무엇을</th><th>어디서</th><th>내용</th></tr>
-    <tr><td>탭 하나</td><td>탭 메뉴의 Save As Excel · Save As PDF</td><td>Summary(실행 정보 · 노트 · Test SQL) → 서브탭마다 한 장(화면과 같은 표, 계획은 줄 색까지) → Objects(읽어 둔 것이 있을 때) → Script → Raw</td></tr>
-    <tr><td>비교</td><td>Compare 창 아래의 Excel · PDF</td><td>SQL → Metrics(엑셀 차트 포함) → Plan → Waits → Statistics</td></tr>
+    <tr><td>탭 하나</td><td>탭 메뉴의 Save As Excel · Save As PDF · Save As HTML</td><td>Summary(실행 정보 · 노트 · Test SQL) → 서브탭마다 한 장(화면과 같은 표, 계획은 줄 색까지) → Objects(읽어 둔 것이 있을 때) → Script → Raw</td></tr>
+    <tr><td>비교</td><td>Compare 창 아래의 Excel · PDF · HTML</td><td>SQL → Metrics(엑셀 차트 포함) → Plan → Waits → Statistics</td></tr>
 </table></div>
 <ul>
     <li>파일 이름은 <code>Task명_탭명_SQLID_년월일_시분초</code>, 비교는 <code>compare_SQLID_vs_SQLID_년월일_시분초</code> 로 제안됩니다.</li>
     <li>PDF 는 A4 가로입니다.</li>
+    <li><b>HTML</b> 은 PDF 와 같은 보고서를 HTML 파일 하나로 저장합니다(그림 · 스타일이 파일 안에 들어 있어 어디서 열어도 같은 모양). 브라우저에서 Ctrl+P 로 인쇄할 때는 가로 방향 · 배경 그래픽 인쇄를 켜면 PDF 와 같게 나옵니다.</li>
     <li>Objects 를 보고서에 넣으려면 내보내기 전에 Objects 서브탭을 한 번 열어 읽어 둡니다. Plan Fix 는 내보내지 않습니다.</li>
 </ul>
 

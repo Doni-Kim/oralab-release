@@ -52,13 +52,13 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 - **세션 명령** — `<Commands>` 블록(`ALTER SESSION …`, PL/SQL 블록)이 테스트 SQL 앞에 같은 세션에서 먼저 돌고, 결과에 같이 남습니다.
 - **단계를 탭으로** — 고칠 때마다 탭 하나, 탭마다 메모와 노트. 탭은 Task 로 묶입니다. 스크립트 · 노트 · 결과는 저절로 저장됩니다.
 - **비교** — 탭 둘, 또는 커서 캐시 · AWR 의 SQL_ID 둘: 실행 1회당 수치, 두 계획을 한 테이블로 합쳐 줄고 는 것 표시, 대기, 통계.
-  엑셀(차트 포함) · PDF 로 저장합니다.
+  엑셀(차트 포함) · PDF · HTML 로 저장합니다.
 - **SQL_ID → Tab** — 커서 캐시의 SQL 을 캡처된 바인드 값과 함께 탭으로 가져옵니다.
 - **Objects** — 실행된 계획의 테이블, 그 인덱스 전부(계획이 쓴 것에 표시), 조건 컬럼의 통계: NDV · 히스토그램 · Low/High ·
   압축 · In-Memory · 파티션.
 - **Plan Fix** — 탭의 계획을 SQL Patch 나 SQL Plan Baseline 으로 고정하는 스크립트. 보여 주기만 하고 실행하지 않습니다.
 - **그 밖에** — 계획 줄별 ASH, SQL Monitor 리포트, Query Block Registry, 옵티마이저 환경, 계획 줄 색, Beautify(공백 · 줄바꿈만),
-  SQL*Plus 식 스크립트 통째 실행, 탭 하나의 엑셀 · PDF, 테마 12종.
+  SQL*Plus 식 스크립트 통째 실행, 탭 하나의 엑셀 · PDF · HTML, 테마 12종.
 - **Exadata** 에서는 통계에 Smart Scan · Storage Index · HCC · Flash Cache 항목과 짧은 판정이 더해집니다.
 
 자세한 것은 같이 들어 있는 사용 설명서(그림 포함, 한국어 · 영어)에 있습니다.

@@ -121,7 +121,7 @@ li > .tablewrap { margin-top: 6px; }
     <a class="sub" href="#cmp-tab">7.1 Two tabs</a>
     <a class="sub" href="#cmp-sqlid">7.2 Two SQL_IDs</a>
     <a href="#sqlidtab">8. SQL_ID → Tab</a>
-    <a href="#export">9. Excel · PDF</a>
+    <a href="#export">9. Excel · PDF · HTML</a>
     <a href="#basescript">10. The base script</a>
     <a href="#keys">11. Keys</a>
     <a href="#files">12. Files · privileges · support</a>
@@ -337,7 +337,7 @@ SELECT /*+ MONITOR */ a.owner, COUNT(*) cnt
     <tr><td>Reorder</td><td>Drag the tab. <b>Sort By Name</b> in the menu sorts by name (numbers as numbers — sql_2 before sql_10)</td></tr>
     <tr><td>Duplicate</td><td><b>Duplicate</b> in the menu — a tab with the same script, memo and note right next to it (the result is not copied)</td></tr>
     <tr><td>Clear the result / remove the tab</td><td><b>Clear</b> / <b>Close</b> in the menu (or the × on the tab)</td></tr>
-    <tr><td>Export · compare</td><td><b>Save As Excel</b> · <b>Save As PDF</b> · <b>Compare with…</b> in the menu</td></tr>
+    <tr><td>Export · compare</td><td><b>Save As Excel</b> · <b>Save As PDF</b> · <b>Save As HTML</b> · <b>Compare with…</b> in the menu</td></tr>
 </table></div>
 <p>Hovering over a tab shows its <code>SQL_ID — memo</code> as a tooltip.</p>
 <p>A <b>task</b> is a group of tabs for one topic (one tuning case, one task). The list in the top row shows the recent ones; <b>More…</b> opens the full list — search by name, open, rename, delete. Tasks are not tied to a connection: each tab records the server it ran on.</p>
@@ -381,15 +381,16 @@ SELECT /*+ MONITOR */ a.owner, COUNT(*) cnt
     <li>The SQL text arrives on one line — tidy it with <b>Beautify</b>.</li>
 </ul>
 
-<h2 id="export">9. Excel · PDF</h2>
+<h2 id="export">9. Excel · PDF · HTML</h2>
 <div class="tablewrap"><table>
     <tr><th>What</th><th>Where</th><th>Content</th></tr>
-    <tr><td>One tab</td><td>Save As Excel · Save As PDF in the tab menu</td><td>Summary (run information · note · Test SQL) → one sheet per sub-tab (the same tables as on screen, plan line colours included) → Objects (when it has been read) → Script → Raw</td></tr>
-    <tr><td>A comparison</td><td>Excel · PDF at the bottom of Compare</td><td>SQL → Metrics (with an Excel chart) → Plan → Waits → Statistics</td></tr>
+    <tr><td>One tab</td><td>Save As Excel · Save As PDF · Save As HTML in the tab menu</td><td>Summary (run information · note · Test SQL) → one sheet per sub-tab (the same tables as on screen, plan line colours included) → Objects (when it has been read) → Script → Raw</td></tr>
+    <tr><td>A comparison</td><td>Excel · PDF · HTML at the bottom of Compare</td><td>SQL → Metrics (with an Excel chart) → Plan → Waits → Statistics</td></tr>
 </table></div>
 <ul>
     <li>The suggested file name is <code>Task_Tab_SQLID_yyyyMMdd_HHmmss</code>, for a comparison <code>compare_SQLID_vs_SQLID_yyyyMMdd_HHmmss</code>.</li>
     <li>PDF pages are A4 landscape.</li>
+    <li><b>HTML</b> saves the same report as the PDF in one HTML file (styles inside, so it looks the same wherever it is opened). To print it from a browser with Ctrl+P, choose landscape and turn on background graphics to match the PDF.</li>
     <li>To have Objects in the report, open the Objects sub-tab once before exporting. Plan Fix is not exported.</li>
 </ul>
 

@@ -58,14 +58,14 @@ The screenshots show test tables on a local test database.
 - **Steps as tabs** — every change gets its own tab with a memo and a note; tabs are grouped into tasks. Scripts,
   notes and results are saved automatically.
 - **Compare** — two tabs, or two SQL_IDs from the cursor cache or AWR: metrics per execution, both plans merged into one
-  table with what went down and up, waits, and statistics. Save the comparison as Excel (with a chart) or PDF.
+  table with what went down and up, waits, and statistics. Save the comparison as Excel (with a chart), PDF or HTML.
 - **SQL_ID → Tab** — brings a statement from the cursor cache into a tab together with its captured bind values.
 - **Objects** — the tables of the executed plan, all their indexes (the ones the plan used are marked) and the statistics
   of the predicate columns: NDV, histogram, low and high values, compression, In-Memory, partitions.
 - **Plan Fix** — a ready-to-review script that pins the plan of a tab with a SQL Patch or a SQL Plan Baseline.
   OraLab shows it; it never runs it.
 - **Also** — ASH by plan line, SQL Monitor report, Query Block Registry, optimizer environment, plan line colours,
-  Beautify (spaces and line breaks only), whole SQL*Plus-style scripts, Excel and PDF of a single tab, 12 themes.
+  Beautify (spaces and line breaks only), whole SQL*Plus-style scripts, Excel, PDF and HTML of a single tab, 12 themes.
 - On **Exadata** the statistics add Smart Scan, Storage Index, HCC and Flash Cache items with a short assessment of each.
 
 The bundled user guide has the details, with screenshots, in English and Korean.
