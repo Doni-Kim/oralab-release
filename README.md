@@ -53,8 +53,8 @@ The screenshots show test tables on a local test database.
   The run ends with a ROLLBACK.
 - **Bind variables** — declare them in a `<Variables>` block at the top of the tab and the SQL uses them as real binds,
   so bind peeking and cursor sharing behave as in production.
-- **Session commands** — a `<Commands>` block (`ALTER SESSION …`, PL/SQL blocks) runs before the test SQL in the same session,
-  and stays with the result.
+- **Session commands** — a `<Commands>` block (`ALTER SESSION …`, PL/SQL blocks) before the SQL runs before the test SQL, one after
+  the SQL runs after the measuring — in the same session, and they stay with the result.
 - **Steps as tabs** — every change gets its own tab with a memo and a note; tabs are grouped into tasks. Scripts,
   notes and results are saved automatically.
 - **Compare** — two tabs, or two SQL_IDs from the cursor cache or AWR: metrics per execution, both plans merged into one
