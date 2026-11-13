@@ -31,9 +31,9 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 |---|---|
 | ![Objects](screenshots/objects.png) | ![Plan Fix](screenshots/plan-fix.png) |
 
-| SQL_ID → Tab, 캡처된 바인드 값과 함께 | Task 목록 |
+| SQLID → Tab, 캡처된 바인드 값과 함께 | Task 목록 |
 |---|---|
-| ![SQL_ID → Tab](screenshots/sqlid-tab.png) | ![Tasks](screenshots/tasks.png) |
+| ![SQLID → Tab](screenshots/sqlid-tab.png) | ![Tasks](screenshots/tasks.png) |
 
 그림은 로컬 시험 DB 의 시험용 테이블입니다.
 
@@ -53,12 +53,13 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 - **단계를 탭으로** — 고칠 때마다 탭 하나, 탭마다 메모와 노트. 탭은 Task 로 묶입니다. 스크립트 · 노트 · 결과는 저절로 저장됩니다.
 - **비교** — 탭 둘, 또는 커서 캐시 · AWR 의 SQL_ID 둘: 실행 1회당 수치, 두 계획을 한 테이블로 합쳐 줄고 는 것 표시, 대기, 통계.
   엑셀(차트 포함) · PDF · HTML 로 저장합니다.
-- **SQL_ID → Tab** — 커서 캐시(또는 AWR)의 SQL 을 바인드 값과 함께 탭으로 가져옵니다. 값은 가장 오래 걸린 SQL Monitor 실행 →
+- **SQLID → Tab** — 커서 캐시(또는 AWR)의 SQL 을 바인드 값과 함께 탭으로 가져옵니다. 값은 가장 오래 걸린 SQL Monitor 실행 →
   커서 캐시의 캡처 → AWR 순으로 찾습니다.
 - **Objects** — 실행된 계획의 테이블, 그 인덱스 전부(계획이 쓴 것에 표시), 조건 컬럼의 통계: NDV · 히스토그램 · Low/High ·
   압축 · In-Memory · 파티션.
 - **Plan Fix** — 탭의 계획을 SQL Patch · SQL Plan Baseline · SQL Profile(리터럴만 다른 문장에도 적용)로 고정하는 스크립트.
   보여 주기만 하고 실행하지 않습니다.
+- **Tuning Advisor** — 탭이 실행한 커서로 SQL Tuning Advisor 를 돌리고 리포트를 탭에 남깁니다(Tuning Pack).
 - **그 밖에** — 계획 줄별 ASH, SQL Monitor 리포트, Query Block Registry, 옵티마이저 환경, 계획 줄 색, Beautify(공백 · 줄바꿈만),
   SQL*Plus 식 스크립트 통째 실행, 탭 하나의 엑셀 · PDF · HTML, 테마 12종.
 - **Exadata** 에서는 통계에 Smart Scan · Storage Index · HCC · Flash Cache 항목과 짧은 판정이 더해집니다.
@@ -70,8 +71,8 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 팩 라이선스가 필요한 기능은 **기본으로 꺼져 있습니다.** 접속마다 체크 상자가 둘 있고, 체크하지 않은 팩의 것은 OraLab 이 읽지 않습니다 —
 그 뷰를 조회하는 것만으로 `DBA_FEATURE_USAGE_STATISTICS` 에 흔적이 남기 때문입니다.
 
-- **Diagnostics Pack licensed** — 탭 실행의 계획 줄별 ASH, SQL_ID Compare 의 AWR 과 ASH 대기, SQL_ID → Tab 의 AWR 바인드 값.
-- **Tuning Pack licensed** — 탭 실행의 SQL Monitor 리포트, SQL_ID → Tab 의 SQL Monitor 바인드 값, Plan Fix 의 SQL Profile 절.
+- **Diagnostics Pack licensed** — 탭 실행의 계획 줄별 ASH, SQLID Compare 의 AWR 과 ASH 대기, SQLID → Tab 의 AWR 바인드 값.
+- **Tuning Pack licensed** — 탭 실행의 SQL Monitor 리포트, SQLID → Tab 의 SQL Monitor 바인드 값, Plan Fix 의 SQL Profile 절, Tuning Advisor 서브탭.
 
 체크했더라도 서버의 `control_management_pack_access` 가 그 팩을 막아 두었으면 읽지 않습니다. 예외 하나: Trace 스크립트를 통째로 붙여 넣은
 탭은 사용자의 글이라 적힌 그대로 실행됩니다 — 거기서는 스크립트에서 두 구간을 직접 끄십시오(사용 설명서 12장).
@@ -91,7 +92,8 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 CREATE USER oralab IDENTIFIED BY "...";
 GRANT CREATE SESSION TO oralab;
 GRANT SELECT_CATALOG_ROLE TO oralab;                 -- V$ · GV$ 뷰
-GRANT EXECUTE ON SYS.DBMS_SQLTUNE TO oralab;         -- 선택, Tuning Pack 이 있을 때만: SQL Monitor 리포트
+GRANT EXECUTE ON SYS.DBMS_SQLTUNE TO oralab;         -- 선택, Tuning Pack 이 있을 때만: SQL Monitor 리포트 · Tuning Advisor
+GRANT ADVISOR TO oralab;                             -- 선택, Tuning Pack 이 있을 때만: Tuning Advisor
 ```
 
 여기에 튜닝할 SQL 이 읽는 테이블의 권한이 더 필요합니다. 롤을 쓰고 싶지 않으면 *Export Base Script* 로 내보낸 스크립트의
