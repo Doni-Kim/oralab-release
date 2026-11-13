@@ -15,21 +15,25 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 
 ## 화면
 
-| SQL 과 바인드 변수가 든 탭 | 실제로 실행된 계획 |
+| SQL 과 바인드 변수가 든 탭 | 실행 요약 |
 |---|---|
-| ![본 화면](screenshots/main.png) | ![계획](screenshots/plan.png) |
+| ![본 화면](screenshots/main.png) | ![Summary](screenshots/summary.png) |
 
-| 실행 요약 | 세션 통계 (V$MYSTAT 델타) |
+| 세션 통계 (V$MYSTAT 델타) | 실제로 실행된 계획 |
 |---|---|
-| ![Summary](screenshots/summary.png) | ![Statistics](screenshots/statistics.png) |
+| ![Statistics](screenshots/statistics.png) | ![계획](screenshots/plan.png) |
+
+| 병렬 실행의 SQL Monitor 리포트 | Objects — 테이블 · 인덱스 · 조건 컬럼 |
+|---|---|
+| ![SQL Monitor](screenshots/sql-monitor.png) | ![Objects](screenshots/objects.png) |
+
+| Plan Fix — SQL Patch · baseline · SQL Profile 스크립트 | Tuning Advisor — 고칠 수 있는 스크립트와 리포트 |
+|---|---|
+| ![Plan Fix](screenshots/plan-fix.png) | ![Tuning Advisor](screenshots/tuning-advisor.png) |
 
 | 비교 — 실행 1회당 수치 | 비교 — 두 계획을 한 테이블로 |
 |---|---|
 | ![비교 Metrics](screenshots/compare-metrics.png) | ![비교 Plan](screenshots/compare-plan.png) |
-
-| Objects — 테이블 · 인덱스 · 조건 컬럼 | Plan Fix — SQL Patch · baseline · SQL Profile 스크립트 |
-|---|---|
-| ![Objects](screenshots/objects.png) | ![Plan Fix](screenshots/plan-fix.png) |
 
 | SQLID → Tab, 캡처된 바인드 값과 함께 | Task 목록 |
 |---|---|

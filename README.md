@@ -16,21 +16,25 @@ on your PC.
 
 ## Screenshots
 
-| A tab with the SQL and its bind variables | The plan it actually ran |
+| A tab with the SQL and its bind variables | Summary of a run |
 |---|---|
-| ![Main window](screenshots/main.png) | ![Plan](screenshots/plan.png) |
+| ![Main window](screenshots/main.png) | ![Summary](screenshots/summary.png) |
 
-| Summary of a run | Session statistics (V$MYSTAT delta) |
+| Session statistics (V$MYSTAT delta) | The plan it actually ran |
 |---|---|
-| ![Summary](screenshots/summary.png) | ![Statistics](screenshots/statistics.png) |
+| ![Statistics](screenshots/statistics.png) | ![Plan](screenshots/plan.png) |
+
+| SQL Monitor report of a parallel run | Objects — tables, indexes, predicate columns |
+|---|---|
+| ![SQL Monitor](screenshots/sql-monitor.png) | ![Objects](screenshots/objects.png) |
+
+| Plan Fix — SQL Patch, baseline and SQL Profile script | Tuning Advisor — editable script and report |
+|---|---|
+| ![Plan Fix](screenshots/plan-fix.png) | ![Tuning Advisor](screenshots/tuning-advisor.png) |
 
 | Compare — metrics per execution | Compare — two plans in one table |
 |---|---|
 | ![Compare metrics](screenshots/compare-metrics.png) | ![Compare plan](screenshots/compare-plan.png) |
-
-| Objects — tables, indexes, predicate columns | Plan Fix — SQL Patch, baseline and SQL Profile script |
-|---|---|
-| ![Objects](screenshots/objects.png) | ![Plan Fix](screenshots/plan-fix.png) |
 
 | SQLID → Tab, with the captured binds | Tasks |
 |---|---|
