@@ -24,17 +24,21 @@ on your PC.
 |---|---|
 | ![Statistics](screenshots/statistics.png) | ![Plan](screenshots/plan.png) |
 
-| SQL Monitor report of a parallel run | Objects — tables, indexes, predicate columns |
+| Bind Variables — every set of bind values of the SQL_ID | SQL Monitor report of a parallel run |
 |---|---|
-| ![SQL Monitor](screenshots/sql-monitor.png) | ![Objects](screenshots/objects.png) |
+| ![Bind Variables](screenshots/bind-variables.png) | ![SQL Monitor](screenshots/sql-monitor.png) |
 
-| Plan Fix — SQL Patch, baseline and SQL Profile script | Tuning Advisor — editable script and report |
+| Objects — tables, indexes, predicate columns | Plan Fix — SQL Patch, baseline and SQL Profile script |
 |---|---|
-| ![Plan Fix](screenshots/plan-fix.png) | ![Tuning Advisor](screenshots/tuning-advisor.png) |
+| ![Objects](screenshots/objects.png) | ![Plan Fix](screenshots/plan-fix.png) |
 
-| Compare — metrics per execution | Compare — two plans in one table |
+| Tuning Advisor — editable script and report | Compare — metrics per execution |
 |---|---|
-| ![Compare metrics](screenshots/compare-metrics.png) | ![Compare plan](screenshots/compare-plan.png) |
+| ![Tuning Advisor](screenshots/tuning-advisor.png) | ![Compare metrics](screenshots/compare-metrics.png) |
+
+| Compare — two plans in one table | SQLID Compare — two SQL_IDs from the cursor cache or AWR |
+|---|---|
+| ![Compare plan](screenshots/compare-plan.png) | ![SQLID Compare](screenshots/sqlid-compare.png) |
 
 | SQLID → Tab, with the captured binds | Tasks |
 |---|---|
@@ -65,6 +69,8 @@ The screenshots show test tables on a local test database.
   table with what went down and up, waits, and statistics. Save the comparison as Excel (with a chart), PDF or HTML.
 - **SQLID → Tab** — brings a statement from the cursor cache (or AWR) into a tab together with bind values: those of its
   slowest SQL Monitor run, else the cursor cache capture, else AWR.
+- **Bind Variables** — every set of bind values of a SQL_ID (SQL Monitor runs, cursor cache, AWR) in a list; open it in a new tab as
+  declared variables or as literals.
 - **Objects** — the tables of the executed plan, all their indexes (the ones the plan used are marked) and the statistics
   of the predicate columns: NDV, histogram, low and high values, compression, In-Memory, partitions.
 - **Plan Fix** — a ready-to-review script that pins the plan of a tab with a SQL Patch, a SQL Plan Baseline or a SQL Profile

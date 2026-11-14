@@ -23,17 +23,21 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 |---|---|
 | ![Statistics](screenshots/statistics.png) | ![계획](screenshots/plan.png) |
 
-| 병렬 실행의 SQL Monitor 리포트 | Objects — 테이블 · 인덱스 · 조건 컬럼 |
+| Bind Variables — SQL_ID 의 바인드 값 묶음 | 병렬 실행의 SQL Monitor 리포트 |
 |---|---|
-| ![SQL Monitor](screenshots/sql-monitor.png) | ![Objects](screenshots/objects.png) |
+| ![Bind Variables](screenshots/bind-variables.png) | ![SQL Monitor](screenshots/sql-monitor.png) |
 
-| Plan Fix — SQL Patch · baseline · SQL Profile 스크립트 | Tuning Advisor — 고칠 수 있는 스크립트와 리포트 |
+| Objects — 테이블 · 인덱스 · 조건 컬럼 | Plan Fix — SQL Patch · baseline · SQL Profile 스크립트 |
 |---|---|
-| ![Plan Fix](screenshots/plan-fix.png) | ![Tuning Advisor](screenshots/tuning-advisor.png) |
+| ![Objects](screenshots/objects.png) | ![Plan Fix](screenshots/plan-fix.png) |
 
-| 비교 — 실행 1회당 수치 | 비교 — 두 계획을 한 테이블로 |
+| Tuning Advisor — 고칠 수 있는 스크립트와 리포트 | 비교 — 실행 1회당 수치 |
 |---|---|
-| ![비교 Metrics](screenshots/compare-metrics.png) | ![비교 Plan](screenshots/compare-plan.png) |
+| ![Tuning Advisor](screenshots/tuning-advisor.png) | ![비교 Metrics](screenshots/compare-metrics.png) |
+
+| 비교 — 두 계획을 한 테이블로 | SQLID Compare — 커서 캐시 · AWR 의 SQL_ID 둘 |
+|---|---|
+| ![비교 Plan](screenshots/compare-plan.png) | ![SQLID Compare](screenshots/sqlid-compare.png) |
 
 | SQLID → Tab, 캡처된 바인드 값과 함께 | Task 목록 |
 |---|---|
@@ -59,6 +63,7 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
   엑셀(차트 포함) · PDF · HTML 로 저장합니다.
 - **SQLID → Tab** — 커서 캐시(또는 AWR)의 SQL 을 바인드 값과 함께 탭으로 가져옵니다. 값은 가장 오래 걸린 SQL Monitor 실행 →
   커서 캐시의 캡처 → AWR 순으로 찾습니다.
+- **Bind Variables** — SQL_ID 의 바인드 값 묶음(SQL Monitor 실행 · 커서 캐시 · AWR)을 콤보로 골라 보고, 변수 선언 또는 리터럴로 새 탭에 엽니다.
 - **Objects** — 실행된 계획의 테이블, 그 인덱스 전부(계획이 쓴 것에 표시), 조건 컬럼의 통계: NDV · 히스토그램 · Low/High ·
   압축 · In-Memory · 파티션.
 - **Plan Fix** — 탭의 계획을 SQL Patch · SQL Plan Baseline · SQL Profile(리터럴만 다른 문장에도 적용)로 고정하는 스크립트.
