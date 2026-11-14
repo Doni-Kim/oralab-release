@@ -44,6 +44,10 @@ on your PC.
 |---|---|
 | ![SQL_ID to tab](screenshots/sqlid-tab.png) | ![Tasks](screenshots/tasks.png) |
 
+| SQLID History — the plans of a SQL_ID in AWR | SQLID History — the trend, line colour = plan |
+|---|---|
+| ![SQLID History](screenshots/sqlid-history.png) | ![SQLID History trend](screenshots/sqlid-history-trend.png) |
+
 The screenshots show test tables on a local test database.
 
 ## Install
@@ -71,12 +75,17 @@ The screenshots show test tables on a local test database.
   slowest SQL Monitor run, else the cursor cache capture, else AWR.
 - **Bind Variables** — every set of bind values of a SQL_ID (SQL Monitor runs, cursor cache, AWR) in a list; open it in a new tab as
   declared variables or as literals.
+- **SQLID History** — what AWR kept about one SQL_ID, in a separate window: its plans with per-execution figures (best and
+  worst marked), bind values per snapshot, the trend with plan changes, ASH, past SQL Monitor reports, the optimizer
+  environment and an AWR SQL report — and Excel, PDF or HTML of it all. Plan Fix loads a plan from AWR as a baseline (text only).
 - **Objects** — the tables of the executed plan, all their indexes (the ones the plan used are marked) and the statistics
   of the predicate columns: NDV, histogram, low and high values, compression, In-Memory, partitions.
 - **Plan Fix** — a ready-to-review script that pins the plan of a tab with a SQL Patch, a SQL Plan Baseline or a SQL Profile
   (the profile also covers statements that differ only in literals).
   OraLab shows it; it never runs it.
 - **Tuning Advisor** — runs the SQL Tuning Advisor on the cursor of a tab and keeps its report with the tab (Tuning Pack).
+- **Connection** — switch to another server without restarting; tasks and tabs stay. The dot before the address turns red
+  when the server cannot be reached.
 - **Also** — ASH by plan line, SQL Monitor report, Query Block Registry, optimizer environment, plan line colours,
   Beautify (spaces and line breaks only), whole SQL*Plus-style scripts, Excel, PDF and HTML of a single tab, 12 themes.
 - On **Exadata** the statistics add Smart Scan, Storage Index, HCC and Flash Cache items with a short assessment of each.
@@ -89,13 +98,13 @@ Features that need a pack licence are **off by default**. Each connection has tw
 pack that is not ticked — querying those views alone leaves a trace in `DBA_FEATURE_USAGE_STATISTICS`.
 
 - **Diagnostics Pack licensed** — ASH by plan line in a tab run; AWR and ASH waits in SQLID Compare; AWR bind values in
-  SQLID → Tab.
+  SQLID → Tab; SQLID History.
 - **Tuning Pack licensed** — the SQL Monitor report of a tab run; SQL Monitor bind values in SQLID → Tab; the SQL Profile
-  section of Plan Fix; the Tuning Advisor sub-tab.
+  section of Plan Fix; the Tuning Advisor sub-tab; the SQL Monitor tab of SQLID History.
 
 Even when ticked, nothing is read if the server's `control_management_pack_access` excludes the pack. One exception:
 a tab into which you paste the whole trace script is your own text and runs as written — switch the two parts off in
-the script there (user guide, chapter 12).
+the script there (user guide, chapter 13).
 
 ## Requirements and limits
 
@@ -114,6 +123,7 @@ GRANT CREATE SESSION TO oralab;
 GRANT SELECT_CATALOG_ROLE TO oralab;                 -- V$ and GV$ views
 GRANT EXECUTE ON SYS.DBMS_SQLTUNE TO oralab;         -- optional, Tuning Pack only: SQL Monitor report, Tuning Advisor
 GRANT ADVISOR TO oralab;                             -- optional, Tuning Pack only: Tuning Advisor
+GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab; -- optional, Diagnostics Pack only: AWR Report in SQLID History
 ```
 
 Plus whatever the SQL you are tuning needs to read. *Export Base Script* writes the trace script to disk; its header lists
