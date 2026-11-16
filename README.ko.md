@@ -80,6 +80,8 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 - **그 밖에** — 계획 줄별 ASH, SQL Monitor 리포트, Query Block Registry, 옵티마이저 환경, 계획 줄 색, Beautify(공백 · 줄바꿈만),
   SQL*Plus 식 스크립트 통째 실행, 탭 하나의 엑셀 · PDF · HTML, 테마 12종.
 - **Exadata** 에서는 통계에 Smart Scan · Storage Index · HCC · Flash Cache 항목과 짧은 판정이 더해집니다.
+- **시퀀스 캐시 채우기 시간**(1.0.8) — 통계의 34번 줄에 SQL 이 시퀀스 캐시를 채우는 데 쓴 시간이 나옵니다.
+  1 ms 이상일 때만 보이며, 보이면 캐시가 작거나 `NOCACHE` 라는 신호입니다.
 
 자세한 것은 같이 들어 있는 사용 설명서(그림 포함, 한국어 · 영어)에 있습니다.
 

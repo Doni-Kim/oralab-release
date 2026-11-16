@@ -89,6 +89,8 @@ The screenshots show test tables on a local test database.
 - **Also** — ASH by plan line, SQL Monitor report, Query Block Registry, optimizer environment, plan line colours,
   Beautify (spaces and line breaks only), whole SQL*Plus-style scripts, Excel, PDF and HTML of a single tab, 12 themes.
 - On **Exadata** the statistics add Smart Scan, Storage Index, HCC and Flash Cache items with a short assessment of each.
+- **Sequence cache refills** (1.0.8) — line 34 of the statistics shows the time the statement spent refilling sequence
+  caches. It appears only when it adds up to 1 ms or more — a sign of a small cache or `NOCACHE`.
 
 The bundled user guide has the details, with screenshots, in English and Korean.
 
