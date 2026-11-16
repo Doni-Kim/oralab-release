@@ -114,9 +114,13 @@ GRANT SELECT_CATALOG_ROLE TO oralab;                 -- V$ · GV$ 뷰
 GRANT EXECUTE ON SYS.DBMS_SQLTUNE TO oralab;         -- 선택, Tuning Pack 이 있을 때만: SQL Monitor 리포트 · Tuning Advisor
 GRANT ADVISOR TO oralab;                             -- 선택, Tuning Pack 이 있을 때만: Tuning Advisor
 GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab; -- 선택, Diagnostics Pack 이 있을 때만: SQLID History 의 AWR Report
+-- 튜닝할 SQL 용 (객체별로 줘도 됩니다):
+GRANT SELECT ANY TABLE TO oralab;                    -- SQL 이 읽는 테이블 · 뷰
+GRANT EXECUTE ANY PROCEDURE TO oralab;               -- SQL 이 사용자 함수를 부를 때만
+GRANT SELECT ANY SEQUENCE TO oralab;                 -- SQL 이 시퀀스를 쓸 때만 (SELECT ANY TABLE 에 없음)
 ```
 
-여기에 튜닝할 SQL 이 읽는 테이블의 권한이 더 필요합니다. 롤을 쓰고 싶지 않으면 *Export Base Script* 로 내보낸 스크립트의
+SELECT_CATALOG_ROLE(또는 SELECT ANY DICTIONARY)은 측정용이고, 아래 세 줄은 튜닝할 SQL 용입니다. DBMS_XPLAN 등 나머지 패키지는 기본으로 PUBLIC 에 실행 권한이 있습니다. 롤을 쓰고 싶지 않으면 *Export Base Script* 로 내보낸 스크립트의
 머리말에 뷰별 grant 목록이 있습니다. 권한이 모자란 구간은 그 자리에 Oracle 의 오류가 찍히고 나머지는 나옵니다.
 
 ## WebView2 런타임

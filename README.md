@@ -126,9 +126,13 @@ GRANT SELECT_CATALOG_ROLE TO oralab;                 -- V$ and GV$ views
 GRANT EXECUTE ON SYS.DBMS_SQLTUNE TO oralab;         -- optional, Tuning Pack only: SQL Monitor report, Tuning Advisor
 GRANT ADVISOR TO oralab;                             -- optional, Tuning Pack only: Tuning Advisor
 GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab; -- optional, Diagnostics Pack only: AWR Report in SQLID History
+-- and for the SQL you tune (or grant object by object):
+GRANT SELECT ANY TABLE TO oralab;                    -- the tables and views it reads
+GRANT EXECUTE ANY PROCEDURE TO oralab;               -- only if it calls user functions
+GRANT SELECT ANY SEQUENCE TO oralab;                 -- only if it uses sequences (not in SELECT ANY TABLE)
 ```
 
-Plus whatever the SQL you are tuning needs to read. *Export Base Script* writes the trace script to disk; its header lists
+SELECT_CATALOG_ROLE (or SELECT ANY DICTIONARY) is for measuring; the last three are for the SQL you tune. Other packages such as DBMS_XPLAN are executable by PUBLIC. *Export Base Script* writes the trace script to disk; its header lists
 the grants view by view if you prefer not to use the role. A part without the privilege prints Oracle's error in its
 place and the rest still appears.
 

@@ -646,6 +646,7 @@ SELECT /*+ MONITOR */ a.owner, COUNT(*) cnt
             <li><b>권한 목록 확인</b>: 상단 툴바의 <b>Export Base Script</b>로 내보낸 .sql 파일의 머리말(Header) 주석에 필요한 <code>GRANT</code> 구문 목록이 그대로 수록되어 있으므로, DBA에게 권한을 요청할 때 활용할 수 있습니다.</li>
             <li><b>권장 롤/시스템 권한</b>: 계정에 <code>SELECT_CATALOG_ROLE</code> 롤 또는 <code>SELECT ANY DICTIONARY</code> 시스템 권한이 부여되어 있으면 대부분의 조회 요건이 충족됩니다.</li>
             <li><b>부분 권한 부족 시 동작</b>: 특정 뷰에 대한 조회 권한이 누락된 경우 전체 실행이 중단되지 않으며, 해당 구간에만 Oracle 권한 오류 메시지가 출력되고 나머지 영역의 결과는 정상적으로 표시됩니다.</li>
+            <li><b>튜닝할 SQL 실행 권한</b>: 위 권한은 측정용입니다. 튜닝할 SQL 이 읽는 테이블 · 뷰의 조회 권한(<code>SELECT ANY TABLE</code> 또는 객체별 <code>SELECT</code>)은 따로 필요합니다. SQL 이 사용자 함수를 부르면 그 <code>EXECUTE</code>(<code>EXECUTE ANY PROCEDURE</code>)가, 시퀀스를 쓰면 그 <code>SELECT</code>(<code>SELECT ANY SEQUENCE</code> — <code>SELECT ANY TABLE</code> 에 들어 있지 않습니다)가 필요합니다. <code>DBMS_XPLAN</code> · <code>DBMS_OUTPUT</code> 등 나머지 패키지는 기본으로 PUBLIC 에 실행 권한이 있어 따로 줄 필요가 없습니다.</li>
         </ul>
         <div class="tablewrap"><table>
             <tr><th>구간</th><th>읽는 것</th></tr>
