@@ -105,23 +105,24 @@ V$SQL 수치 · 실제 실행 계획을 한 번에 받습니다. SQL 을 고쳐 
 
 ## 권한
 
-접속 계정이 Trace 스크립트가 쓰는 성능 뷰를 읽을 수 있어야 합니다.
+아래 권한이면 OraLab 의 모든 기능이 동작합니다 — 12.2 · 19c · 26ai 에서 이 권한만 가진 계정으로 확인했습니다.
+*Export Base Script* 로 내보낸 스크립트 머리말에도 같은 grant 가 들어 있습니다.
 
 ```sql
 CREATE USER oralab IDENTIFIED BY "...";
 GRANT CREATE SESSION TO oralab;
-GRANT SELECT_CATALOG_ROLE TO oralab;                 -- V$ · GV$ 뷰
-GRANT EXECUTE ON SYS.DBMS_SQLTUNE TO oralab;         -- 선택, Tuning Pack 이 있을 때만: SQL Monitor 리포트 · Tuning Advisor
-GRANT ADVISOR TO oralab;                             -- 선택, Tuning Pack 이 있을 때만: Tuning Advisor
-GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab; -- 선택, Diagnostics Pack 이 있을 때만: SQLID History 의 AWR Report
--- 튜닝할 SQL 용 (객체별로 줘도 됩니다):
-GRANT SELECT ANY TABLE TO oralab;                    -- SQL 이 읽는 테이블 · 뷰
-GRANT EXECUTE ANY PROCEDURE TO oralab;               -- SQL 이 사용자 함수를 부를 때만
-GRANT SELECT ANY SEQUENCE TO oralab;                 -- SQL 이 시퀀스를 쓸 때만 (SELECT ANY TABLE 에 없음)
+GRANT SELECT_CATALOG_ROLE TO oralab;
+GRANT SELECT ANY DICTIONARY TO oralab;
+GRANT SELECT ANY TABLE TO oralab;                          -- 튜닝할 SQL 이 읽는 테이블 · 뷰
+GRANT ADVISOR TO oralab;                                   -- Tuning Advisor 서브탭 (Tuning Pack)
+GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab;   -- SQLID History 의 AWR Report (Diagnostics Pack)
+-- 튜닝할 SQL 이 다른 스키마의 객체를 쓸 때만:
+GRANT SELECT ANY SEQUENCE TO oralab;                       -- 시퀀스
+GRANT EXECUTE ANY PROCEDURE TO oralab;                     -- 함수
 ```
 
-SELECT_CATALOG_ROLE(또는 SELECT ANY DICTIONARY)은 측정용이고, 아래 세 줄은 튜닝할 SQL 용입니다. DBMS_XPLAN 등 나머지 패키지는 기본으로 PUBLIC 에 실행 권한이 있습니다. 롤을 쓰고 싶지 않으면 *Export Base Script* 로 내보낸 스크립트의
-머리말에 뷰별 grant 목록이 있습니다. 권한이 모자란 구간은 그 자리에 Oracle 의 오류가 찍히고 나머지는 나옵니다.
+DBMS_XPLAN · DBMS_SQLTUNE 등 나머지 패키지는 기본으로 PUBLIC 에 실행 권한이 있습니다. DBMS_WORKLOAD_REPOSITORY 는 없습니다.
+Trace 스크립트는 PL/SQL 블록 하나라서, 읽는 뷰 가운데 하나라도 권한이 없으면 블록 전체가 컴파일 오류로 실행되지 않습니다.
 
 ## WebView2 런타임
 

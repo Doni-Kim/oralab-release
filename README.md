@@ -117,24 +117,24 @@ the script there (user guide, chapter 13).
 
 ## Privileges
 
-The account you connect with needs to read the performance views the trace script uses.
+With these grants every feature of OraLab works — checked on 12.2, 19c and 26ai with an account holding only these.
+*Export Base Script* writes the same grants in the header of the script.
 
 ```sql
 CREATE USER oralab IDENTIFIED BY "...";
 GRANT CREATE SESSION TO oralab;
-GRANT SELECT_CATALOG_ROLE TO oralab;                 -- V$ and GV$ views
-GRANT EXECUTE ON SYS.DBMS_SQLTUNE TO oralab;         -- optional, Tuning Pack only: SQL Monitor report, Tuning Advisor
-GRANT ADVISOR TO oralab;                             -- optional, Tuning Pack only: Tuning Advisor
-GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab; -- optional, Diagnostics Pack only: AWR Report in SQLID History
--- and for the SQL you tune (or grant object by object):
-GRANT SELECT ANY TABLE TO oralab;                    -- the tables and views it reads
-GRANT EXECUTE ANY PROCEDURE TO oralab;               -- only if it calls user functions
-GRANT SELECT ANY SEQUENCE TO oralab;                 -- only if it uses sequences (not in SELECT ANY TABLE)
+GRANT SELECT_CATALOG_ROLE TO oralab;
+GRANT SELECT ANY DICTIONARY TO oralab;
+GRANT SELECT ANY TABLE TO oralab;                          -- tables and views read by the SQL you tune
+GRANT ADVISOR TO oralab;                                   -- Tuning Advisor sub-tab (Tuning Pack)
+GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab;   -- AWR Report in SQLID History (Diagnostics Pack)
+-- only if the SQL you tune uses objects of other schemas:
+GRANT SELECT ANY SEQUENCE TO oralab;                       -- sequences
+GRANT EXECUTE ANY PROCEDURE TO oralab;                     -- functions
 ```
 
-SELECT_CATALOG_ROLE (or SELECT ANY DICTIONARY) is for measuring; the last three are for the SQL you tune. Other packages such as DBMS_XPLAN are executable by PUBLIC. *Export Base Script* writes the trace script to disk; its header lists
-the grants view by view if you prefer not to use the role. A part without the privilege prints Oracle's error in its
-place and the rest still appears.
+DBMS_XPLAN, DBMS_SQLTUNE and the other packages are executable by PUBLIC; DBMS_WORKLOAD_REPOSITORY is not.
+The trace script is a single PL/SQL block: if any view it reads is not granted, the whole block fails to compile and nothing runs.
 
 ## WebView2 Runtime
 
