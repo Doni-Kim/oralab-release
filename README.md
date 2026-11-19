@@ -86,11 +86,11 @@ The screenshots show test tables on a local test database.
 - **Tuning Advisor** — runs the SQL Tuning Advisor on the cursor of a tab and keeps its report with the tab (Tuning Pack).
 - **Connection** — switch to another server without restarting; tasks and tabs stay. The dot before the address turns red
   when the server cannot be reached.
+- **Exadata** — on Exadata the statistics add Smart Scan, Storage Index, HCC and Flash Cache items with a short assessment of each.
+- **Sequence cache refills** (1.0.8+) — line 34 of the statistics shows the time the statement spent refilling sequence
+  caches. It appears only when it adds up to 1 ms or more — a sign of a small cache or `NOCACHE`.
 - **Also** — ASH by plan line, SQL Monitor report, Query Block Registry, optimizer environment, plan line colours,
   Beautify (spaces and line breaks only), whole SQL*Plus-style scripts, Excel, PDF and HTML of a single tab, 12 themes.
-- On **Exadata** the statistics add Smart Scan, Storage Index, HCC and Flash Cache items with a short assessment of each.
-- **Sequence cache refills** (1.0.8) — line 34 of the statistics shows the time the statement spent refilling sequence
-  caches. It appears only when it adds up to 1 ms or more — a sign of a small cache or `NOCACHE`.
 
 The bundled user guide has the details, with screenshots, in English and Korean.
 
@@ -99,23 +99,29 @@ The bundled user guide has the details, with screenshots, in English and Korean.
 Features that need a pack licence are **off by default**. Each connection has two boxes, and OraLab reads nothing from a
 pack that is not ticked — querying those views alone leaves a trace in `DBA_FEATURE_USAGE_STATISTICS`.
 
-- **Diagnostics Pack licensed** — ASH by plan line in a tab run; AWR and ASH waits in SQLID Compare; AWR bind values in
-  SQLID → Tab; SQLID History.
-- **Tuning Pack licensed** — the SQL Monitor report of a tab run; SQL Monitor bind values in SQLID → Tab; the SQL Profile
-  section of Plan Fix; the Tuning Advisor sub-tab; the SQL Monitor tab of SQLID History.
+- **Diagnostics Pack licensed**
+  - Tab run: ASH by plan line
+  - SQLID Compare: AWR and ASH waits
+  - SQLID → Tab: AWR bind values
+  - SQLID History
+- **Tuning Pack licensed**
+  - Tab run: the SQL Monitor report
+  - SQLID → Tab: SQL Monitor bind values
+  - Plan Fix: the SQL Profile section
+  - Tuning Advisor: the sub-tab
+  - SQLID History: the SQL Monitor tab
 
 Even when ticked, nothing is read if the server's `control_management_pack_access` excludes the pack. One exception:
 a tab into which you paste the whole trace script is your own text and runs as written — switch the two parts off in
 the script there (user guide, chapter 13).
 
-## Requirements and limits
+## System requirements and limitations
 
-- **Windows only** (x64). The UI is web-based (Blazor Hybrid), so it does not run on Linux or macOS.
-- **Oracle 12.2 or later.** Checked on 12.2, 19c and 26ai.
-- A tab that holds a single statement accepts SELECT and WITH only; DML, DDL and PL/SQL run as a script.
-- The code is obfuscated with ConfuserEx — a free tool, so do not expect strong protection.
+- **OS**: Windows only (x64). The UI is web-based (Blazor Hybrid), so it does not run on Linux or macOS.
+- **Database**: Oracle 12.2 or later. Checked on 12.2, 19c and 26ai.
+- **Single-statement tabs**: a tab that holds a single statement accepts SELECT and WITH only; DML, DDL and PL/SQL run as a script.
 
-## Privileges
+## Required database privileges
 
 With these grants every feature of OraLab works — checked on 12.2, 19c and 26ai with an account holding only these.
 *Export Base Script* writes the same grants in the header of the script.
@@ -128,24 +134,26 @@ GRANT SELECT ANY DICTIONARY TO oralab;
 GRANT SELECT ANY TABLE TO oralab;                          -- tables and views read by the SQL you tune
 GRANT ADVISOR TO oralab;                                   -- Tuning Advisor sub-tab (Tuning Pack)
 GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oralab;   -- AWR Report in SQLID History (Diagnostics Pack)
+
 -- only if the SQL you tune uses objects of other schemas:
 GRANT SELECT ANY SEQUENCE TO oralab;                       -- sequences
 GRANT EXECUTE ANY PROCEDURE TO oralab;                     -- functions
 ```
 
-DBMS_XPLAN, DBMS_SQLTUNE and the other packages are executable by PUBLIC; DBMS_WORKLOAD_REPOSITORY is not.
+**Note**: `DBMS_XPLAN`, `DBMS_SQLTUNE` and the other packages are executable by PUBLIC; `DBMS_WORKLOAD_REPOSITORY` is not.
 The trace script is a single PL/SQL block: if any view it reads is not granted, the whole block fails to compile and nothing runs.
 
-## WebView2 Runtime
+## WebView2 runtime requirement
 
 OraLab draws its window with the Microsoft Edge WebView2 Runtime. When the runtime is missing, OraLab says so at startup and exits.
-It is built into Windows 11 and shipped to most Windows 10 machines; Windows Server often needs it installed separately —
-use Microsoft's "Evergreen Standalone Installer" (`MicrosoftEdgeWebView2RuntimeInstallerX64.exe`) from
-https://developer.microsoft.com/microsoft-edge/webview2/
+It is built into Windows 11 and shipped to most Windows 10 machines; Windows Server often needs it installed separately.
 
-## If something breaks
+Use Microsoft's "Evergreen Standalone Installer" (`MicrosoftEdgeWebView2RuntimeInstallerX64.exe`) from the
+[official WebView2 download page](https://developer.microsoft.com/microsoft-edge/webview2/).
+
+## Troubleshooting and issues
 
 Errors are written to `OraLab.log` next to the executable (the file only appears when something went wrong).
 
 - **Bugs and questions** — open an [issue](https://github.com/Doni-Kim/oralab-release/issues).
-  Please do not attach the log or `OraLab.db` there: the log holds no passwords, but both can contain server addresses and SQL text.
+- **Security note** — please do not attach the log or `OraLab.db` there: the log holds no passwords, but both can contain server addresses and SQL text.
