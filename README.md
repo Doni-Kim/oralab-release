@@ -73,7 +73,8 @@ The screenshots show test tables on a local test database.
   the SQL runs after the measuring — in the same session, and they stay with the result.
 - **Live Stats** (1.1.0+) — while a SQL of tens of seconds or minutes runs, each Refresh shows the state of the run session and
   its PX servers (also on other RAC instances), read statistics as total, change and per second, the progress of long operations and,
-  with Diagnostics Pack, the plan line each session is on and the time spent per plan line so far.
+  with Diagnostics Pack, the plan line each session is on and the time spent per plan line so far. Sessions are grouped per instance,
+  and a line at the top shows how long each query took.
 - **Steps as tabs** — every change gets its own tab with a memo and a note; tabs are grouped into tasks. Scripts,
   notes and results are saved automatically.
 - **Compare** — two tabs, or two SQL_IDs from the cursor cache or AWR: metrics per execution, both plans merged into one
@@ -96,7 +97,7 @@ The screenshots show test tables on a local test database.
 - **Exadata** — on Exadata the statistics add Smart Scan, Storage Index, HCC and Flash Cache items with a short assessment of each.
 - **Sequence cache refills** (1.0.8+) — line 34 of the statistics shows the time the statement spent refilling sequence
   caches. It appears only when it adds up to 1 ms or more — a sign of a small cache or `NOCACHE`.
-- **Also** — ASH by plan line, SQL Monitor report, Query Block Registry, optimizer environment, plan line colours,
+- **Also** — ASH by plan line (with the wait events of each line), SQL Monitor report, Query Block Registry, optimizer environment, plan line colours,
   Beautify (spaces and line breaks only), Excel, PDF and HTML of a single tab, 12 themes.
 
 The bundled user guide has the details, with screenshots, in English and Korean.
