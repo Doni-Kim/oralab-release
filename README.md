@@ -80,7 +80,7 @@ The screenshots show test tables on a local test database.
 - **Compare** — two tabs, or two SQL_IDs from the cursor cache or AWR: metrics per execution, both plans merged into one
   table with what went down and up, waits, and statistics. Save the comparison as Excel (with a chart), PDF or HTML.
 - **SQLID → Tab** — brings a statement from the cursor cache (or AWR) into a tab together with bind values: those of its
-  slowest SQL Monitor run, else the cursor cache capture, else AWR.
+  slowest SQL Monitor run, else the cursor cache capture (another child's when the chosen one has none), else AWR.
 - **Bind Variables** — every set of bind values of a SQL_ID (SQL Monitor runs, cursor cache, AWR) in a list; open it in a new tab as
   declared variables or as literals.
 - **SQLID History** — what AWR kept about one SQL_ID, in a separate window: its plans with per-execution figures (best and
